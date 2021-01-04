@@ -1,20 +1,62 @@
-// football-problem.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <fstream>
+#include <vector>
+
+int solveMax(int k, int m, int n);
+int solveMin(int k, int m, int n);
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::ifstream inFile;
+    inFile.open("SmallSample.txt");
+    int numSamples;
+
+    std::vector<int> k; //Goli mostva A
+    std::vector<int> m; //Goli mostva B
+    std::vector<int> n; //Stevilo tekem
+
+    //Branje iz datoteke
+    if (inFile.is_open()) {
+        int indexer = 0;
+        int kR, mR, nR;
+        inFile >> numSamples;
+
+        while (inFile >> kR >> mR >> nR) {
+            k.push_back(kR);
+            m.push_back(mR);
+            n.push_back(nR);
+        }
+    }
+    else {
+        std::cout << "FAkka u\n";
+        return 0;
+    }
+
+    //Datoteka v katero bomo zapisali rezultate
+    std::ofstream outFile;
+    outFile.open("result.txt");
+
+    //Sprehod skozi vse tekme
+    for (int i = 0; i < numSamples; i++) {
+
+        //Resitev za maximalno stevilo tock
+        int max = solveMax(k[i], m[i], n[i]);
+
+        //Resitev za minimalno stevilo tock
+        int min = solveMin(k[i], m[i], n[i]);
+
+        outFile << max << " " << min << std::endl;
+    }
+
+
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+int solveMax(int k, int m, int n) {
+
+}
+
+int solveMin(int k, int m, int n) {
+
+}
